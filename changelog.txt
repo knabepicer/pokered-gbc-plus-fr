@@ -1,0 +1,63 @@
+-Uses GBC colorization and gen 2 trainers sprites (some sprites edited to match aesthetic, eg: tamer)
+-Displays exp bar in battle, and indicator for caught wild pokemon
+-Unique menu sprites for each pokemon
+-Hold B to run/surf/bike faster
+-Trade evos evolve at level 35
+-Many trainers edited to ensure fighting all trainers will have you encounter all pokemon lines at least once, bar legendaries (ex: Eevee added to Female Jr. Trainers) and for more variety
+-Ghost (Lick) SE against psychic, Poison neutral against Bug
+-Leech Seed/Poison/Burn tweaked to 1/8 max HP damage
+-Bag size increased to 50
+-Press B to quickly run from wild battle
+-Safari Balls now function like Great Balls, improving their catchrates against most/all Safari Zone captures
+
+-Focus Energy bug fixed
+-Incorrect battle text for effectiveness against dual-type Pokémon fixed
+-Moves with 100% to hit/crit no longer have 1/256 chance of missing
+-Misc trainer AI fixes
+-Fixed bug where transformed wild pokemon is assumed to be Ditto
+
+All Pokémon (Yes, even that one) can be obtained in both Red and Blue patches! 
+Encounter changes (mostly based on yellow/shin pokemon red):
+Bulbasaur added to route 4
+Squirtle added to route 6
+Charmander added to route 25
+Ekans and Sandshrew can be found in route 4 regardless of version (but rarer on swapped versions)
+Vulpix and Growlithe can be found in route 8 regardless of version (but rarer on swapped versions)
+Mankey and Meowth can be found in route 5 regardless of version (but rarer on swapped versions)
+Oddish and Bellsprout can be found in route 5 regardless of version (but rarer on swapped versions)
+Farfetch'd added to routes 12 and 13
+Cubone added to rock tunnel
+Dodrio added to route 17
+Electabuzz added to power plant in all versions
+Porygon added to power plant
+Magmar added to pokemon mansion basement in all versions
+Tangela added to route 7
+Snorlax added to victory road
+Eevee added to route 21
+Scyther and Pinsir in Safari Zone central area regardless of version, as well as game corner
+Jynx added to Seafoam islands B2F, B3F, B4F
+Lapras replaces Krabby in Safari Zone fishing, also silph co. gift Lapras level is raised to 25
+Magnemite added to route 10
+Hitmonlee/Hitmonchan added to cerulean cave B1F, 1F
+Lickitung added to safari zone east
+Mr. Mime added to safari zone west
+Ponyta added to route 7, 17
+Seaking, Tentacruel added to sea routes 19, 20, 21
+Psyduck replaces goldeen in route 22 fishing
+Sandslash and Arbok swapped in cerulean cave 1F
+Fishing in Cerulean Cave with super rod can obtain Kabuto/Omanyte/Gyarados/Dewgong
+
+Moveset changes:
+Tangela learns vine whip at level 18, poison powder at 21
+Ponyta learns growl at level 15, stomp at 22, tail whip at 27
+Eevee updated to yellow learnset: Tail Whip at level 1, Sand Attack at level 8, Growl at level 16
+
+
+
+Credits
+-pokered-gbc-plus by engezerstorung
+-pokered-gbc disassembly by FroggestSpirit, Drenn, and dannye, based on pokered disassembly by pret
+-Unique menu sprites for each pokemon by Blue Emerald, Chamber_, Soloo993, et al., 
+-running shoes by Luna
+-revamped OW pokemon/sprites by Megaman Omega
+-OW trainer sprites revamps by Megaman Omega, Polished Crystal team, FrenchOrange
