@@ -27,7 +27,7 @@ ENDM
 	trainer_const BIKER          ; $0A
 	trainer_const BURGLAR        ; $0B
 	trainer_const ENGINEER       ; $0C
-	trainer_const UNUSED_JUGGLER ; $0D
+	trainer_const MR_FUJI		 ; $0D
 	trainer_const FISHER         ; $0E
 	trainer_const SWIMMER        ; $0F
 	trainer_const CUE_BALL       ; $10
@@ -46,6 +46,7 @@ ENDM
 	trainer_const GIOVANNI       ; $1D
 	trainer_const ROCKET         ; $1E
 	trainer_const COOLTRAINER_M  ; $1F
+	trainer_const SWIMMER_F      ; $30
 	trainer_const COOLTRAINER_F  ; $20
 	trainer_const BRUNO          ; $21
 	trainer_const BROCK          ; $22

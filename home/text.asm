@@ -180,10 +180,10 @@ TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
 PCCharText::      db "PC@"
 RocketCharText::  db "ROCKET@"
-PlacePOKeText::   db "POKé@"
+PlacePOKeText::   db "MOé@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"
-PlacePKMNText::   db "<PK><MN>@"
+PlacePKMNText::   db "MOé@"
 
 ContText::
 	push de

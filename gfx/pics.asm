@@ -174,7 +174,6 @@ BirdKeeperPic::    INCBIN "gfx/gstrainers/birdkeeper.pic"
 BlackbeltPic::     INCBIN "gfx/gstrainers/blackbelt.pic"
 Rival1Pic::        INCBIN "gfx/gstrainers/rival1.pic"
 ProfOakPic::       INCBIN "gfx/gstrainers/prof.oak.pic"
-ChiefPic::
 ScientistPic::     INCBIN "gfx/gstrainers/scientist.pic"
 GiovanniPic::      INCBIN "gfx/gstrainers/giovanni.pic"
 RocketPic::        INCBIN "gfx/gstrainers/rocket.pic"
@@ -195,6 +194,8 @@ LoreleiPic::       INCBIN "gfx/gstrainers/lorelei.pic"
 ChannelerPic::     INCBIN "gfx/gstrainers/channeler.pic"
 AgathaPic::        INCBIN "gfx/gstrainers/agatha.pic"
 LancePic::         INCBIN "gfx/gstrainers/lance.pic"
+MrFujiPic::        INCBIN "gfx/gstrainers/mrfuji.pic"
+SwimmerFPic::      INCBIN "gfx/gstrainers/swimmer_f.pic"
 ENDC
 
 IF !GEN_2_GRAPHICS
@@ -246,8 +247,6 @@ AgathaPic::        INCBIN "gfx/trainers/agatha.pic"
 LancePic::         INCBIN "gfx/trainers/lance.pic"
 ENDC
 
-
-; Inserted pokemon images go here
 
 SECTION "Pics 7", ROMX
 

@@ -16,7 +16,7 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
-	dbw 3, JugglerAI ; unused_juggler
+	dbw 3, GenericAI ; mr_fuji
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
@@ -51,4 +51,5 @@ TrainerAIPointers:
 	dbw 3, GenericAI
 	dbw 2, AgathaAI ; agatha
 	dbw 1, LanceAI ; lance
+	dbw 3, GenericAI ; swimmerf
 	assert_table_length NUM_TRAINERS

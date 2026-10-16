@@ -1,3 +1,9 @@
+# moemon-red
+
+Built off pokered-gbc-plus. See below for original readmes:
+
+
+
 This Romhack start from my port of the pokered-gbc to french to build upon.
 
 If you want to play the game in english look at the english branch here : https://github.com/Engezerstorung/pokered-gbc-plus-fr/tree/English .

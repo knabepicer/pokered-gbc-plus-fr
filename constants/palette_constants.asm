@@ -1,14 +1,3 @@
-; monochrome palette color ids
-	const_def
-	const SHADE_WHITE ; %00
-	const SHADE_LIGHT ; %01
-	const SHADE_DARK  ; %10
-	const SHADE_BLACK ; %11
-DEF NUM_PAL_COLORS EQU const_value
-
-DEF PAL_COLOR_SIZE EQU 2
-DEF PALETTE_SIZE EQU NUM_PAL_COLORS * PAL_COLOR_SIZE
-
 ; pal/blk packets
 ; SetPalFunctions indexes (see engine/gfx/palettes.asm)
 	const_def
@@ -237,7 +226,7 @@ IF GEN_2_GRAPHICS
 	const PAL_BIKER         ; $C5
 	const PAL_BURGLAR       ; $C6
 	const PAL_ENGINEER      ; $C7
-	const PAL_JUGGLER       ; $C8
+	const PAL_MR_FUJI       ; $C8
 	const PAL_FISHERMAN     ; $C9
 	const PAL_SWIMMER       ; $CA
 	const PAL_CUEBALL       ; $CB
@@ -272,6 +261,7 @@ IF GEN_2_GRAPHICS
 	const PAL_CHANNELER     ; $E8
 	const PAL_AGATHA        ; $E9
 	const PAL_LANCE         ; $EA
-	const PAL_HERO          ; $EB
+	const PAL_SWIMMER_F     ; $EB
+	const PAL_HERO		    ; $EC
 ENDC
 DEF NUM_SGB_PALS EQU const_value
