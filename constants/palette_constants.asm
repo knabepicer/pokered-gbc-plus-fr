@@ -261,7 +261,6 @@ IF GEN_2_GRAPHICS
 	const PAL_CHANNELER     ; $E8
 	const PAL_AGATHA        ; $E9
 	const PAL_LANCE         ; $EA
-	const PAL_SWIMMER_F     ; $EB
 	const PAL_HERO		    ; $EC
 ENDC
 DEF NUM_SGB_PALS EQU const_value

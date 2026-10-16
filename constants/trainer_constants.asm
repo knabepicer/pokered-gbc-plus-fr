@@ -46,7 +46,6 @@ ENDM
 	trainer_const GIOVANNI       ; $1D
 	trainer_const ROCKET         ; $1E
 	trainer_const COOLTRAINER_M  ; $1F
-	trainer_const SWIMMER_F      ; $30
 	trainer_const COOLTRAINER_F  ; $20
 	trainer_const BRUNO          ; $21
 	trainer_const BROCK          ; $22

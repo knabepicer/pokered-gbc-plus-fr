@@ -156,7 +156,7 @@ ItemUseBall:
 	dec a
 	jr nz, .notOldManBattle
 
-.oldManBattle
+; Old Man battle
 	ld hl, wGrassRate
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
@@ -203,12 +203,14 @@ ItemUseBall:
 	cp b
 	jr c, .loop
 
-; Less than or equal to 200 is good enough for a Great Ball.
+; Less than or equal to 200 is good enough for a Great/Safari Ball.
 	ld a, [hl]
 	cp GREAT_BALL
 	jr z, .checkForAilments
+	cp SAFARI_BALL
+	jr z, .checkForAilments
 
-; If it's an Ultra/Safari Ball and Rand1 is greater than 150, try again.
+; If it's an Ultra Ball and Rand1 is greater than 150, try again.
 	ld a, 150
 	cp b
 	jr c, .loop
@@ -250,12 +252,14 @@ ItemUseBall:
 	ldh [hMultiplier], a
 	call Multiply
 
-; Determine BallFactor. It's 8 for Great Balls and 12 for the others.
+; Determine BallFactor. It's 8 for Great Balls/Safari Balls and 12 for the others.
 	ld a, [wCurItem]
 	cp GREAT_BALL
-	ld a, 12
-	jr nz, .skip1
 	ld a, 8
+	jr z, .skip1
+	cp SAFARI_BALL
+	jr z, .skip1
+	ld a, 12
 
 .skip1
 ; Note that the results of all division operations are floored.
@@ -474,8 +478,6 @@ ItemUseBall:
 	ld hl, wEnemyBattleStatus3
 	bit TRANSFORMED, [hl]
 	jr z, .notTransformed
-	ld a, DITTO
-	ld [wEnemyMonSpecies2], a
 	jr .skip6
 
 .notTransformed
@@ -645,7 +647,7 @@ ItemUseBicycle:
 	jp z, ItemUseNotTime
 	dec a ; is player already bicycling?
 	jr nz, .tryToGetOnBike
-.getOffBike
+; get off bike
 	call ItemUseReloadOverworldData
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
@@ -671,13 +673,13 @@ ItemUseSurfboard:
 	ld [wWalkBikeSurfStateCopy], a
 	cp 2 ; is the player already surfing?
 	jr z, .tryToStopSurfing
-.tryToSurf
+; try to Surf
 	call IsNextTileShoreOrWater
 	jp c, SurfingAttemptFailed
 	ld hl, TilePairCollisionsWater
 	call CheckForTilePairCollisions
 	jp c, SurfingAttemptFailed
-.surf
+; surfing
 	call .makePlayerMoveForward
 	ld hl, wStatusFlags5
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
@@ -921,7 +923,7 @@ ItemUseMedicine:
 	ld [wHPBarOldHP], a ; current HP stored at wHPBarOldHP (2 bytes, big-endian)
 	or b
 	jr nz, .notFainted
-.fainted
+; fainted
 	ld a, [wCurItem]
 	cp REVIVE
 	jr z, .updateInBattleFaintedData
@@ -973,7 +975,7 @@ ItemUseMedicine:
 .skipComparingLSB
 	pop hl
 	jr nz, .notFullHP
-.fullHP ; if the pokemon's current HP equals its max HP
+; if the pokemon's current HP equals its max HP
 	ld a, [wCurItem]
 	cp FULL_RESTORE
 	jp nz, .healingItemNoEffect
@@ -1400,15 +1402,15 @@ ItemUseMedicine:
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
-	ld d, $01
-	callfar PrintStatsBox ; display new stats text box
-	call WaitForTextScrollButtonPress ; wait for button press
+	ld d, LEVEL_UP_STATS_BOX
+	callfar PrintStatsBox
+	call WaitForTextScrollButtonPress
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
-	predef LearnMoveFromLevelUp ; learn level up move, if any
+	predef LearnMoveFromLevelUp
 	xor a
 	ld [wForceEvolution], a
-	callfar TryEvolvingMon ; evolve pokemon, if appropriate
+	callfar TryEvolvingMon
 	ld a, $01
 	ld [wUpdateSpritesEnabled], a
 	pop af
@@ -1433,11 +1435,11 @@ INCLUDE "data/battle/stat_names.asm"
 ItemUseBait:
 	ld hl, ThrewBaitText
 	call PrintText
-	ld hl, wEnemyMonActualCatchRate ; catch rate
+	ld hl, wEnemyMonActualCatchRate
 	srl [hl] ; halve catch rate
 	ld a, BAIT_ANIM
-	ld hl, wSafariBaitFactor ; bait factor
-	ld de, wSafariEscapeFactor ; escape factor
+	ld hl, wSafariBaitFactor
+	ld de, wSafariEscapeFactor
 	jr BaitRockCommon
 
 ; for CASCADEBADGE when used from the
@@ -1446,7 +1448,7 @@ ItemUseBait:
 ItemUseRock:
 	ld hl, ThrewRockText
 	call PrintText
-	ld hl, wEnemyMonActualCatchRate ; catch rate
+	ld hl, wEnemyMonActualCatchRate
 	ld a, [hl]
 	add a ; double catch rate
 	jr nc, .noCarry
@@ -1454,8 +1456,8 @@ ItemUseRock:
 .noCarry
 	ld [hl], a
 	ld a, ROCK_ANIM
-	ld hl, wSafariEscapeFactor ; escape factor
-	ld de, wSafariBaitFactor ; bait factor
+	ld hl, wSafariEscapeFactor
+	ld de, wSafariBaitFactor
 
 BaitRockCommon:
 	ld [wAnimationID], a
@@ -1689,7 +1691,7 @@ ItemUsePokeFlute:
 	ret
 .notRoute12
 	cp ROUTE_16
-	jr nz, .noSnorlaxToWakeUp
+	jr nz, .notRoute16
 	CheckEvent EVENT_BEAT_ROUTE16_SNORLAX
 	jr nz, .noSnorlaxToWakeUp
 ; if the player hasn't beaten Route 16 Snorlax
@@ -1699,6 +1701,18 @@ ItemUsePokeFlute:
 	ld hl, PlayedFluteHadEffectText
 	call PrintText
 	SetEvent EVENT_FIGHT_ROUTE16_SNORLAX
+	ret
+.notRoute16
+	cp POKEMON_MANSION_B1F
+	jr nz, .noSnorlaxToWakeUp
+	CheckEvent EVENT_BEAT_MEW
+	jr nz, .noSnorlaxToWakeUp
+	CheckEvent EVENT_BEAT_FUJI
+	jr z, .noSnorlaxToWakeUp
+; if player hasn't beaten Mew
+	ld hl, PlayedFluteHadEffectText
+	call PrintText
+	SetEvent EVENT_FIGHT_MEW
 	ret
 .noSnorlaxToWakeUp
 	ld hl, PlayedFluteNoEffectText
@@ -1995,8 +2009,8 @@ ItemUsePPRestore:
 	ld a, [wPPRestoreItem]
 	cp ETHER
 	jr nc, .useEther ; if Ether or Max Ether
-.usePPUp
-	ld bc, wPartyMon1PP - wPartyMon1Moves
+; use PP Up
+	ld bc, MON_PP - MON_MOVES
 	add hl, bc
 	ld a, [hl] ; move PP
 	cp 3 << 6 ; have 3 PP Ups already been used?
@@ -2026,10 +2040,10 @@ ItemUsePPRestore:
 	cp b ; is the pokemon whose PP was restored active in battle?
 	jr nz, .skipUpdatingInBattleData
 	ld hl, wPartyMon1PP
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld de, wBattleMonPP
-	ld bc, 4
+	ld bc, NUM_MOVES
 	call CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
 	ld a, SFX_HEAL_AILMENT
@@ -2048,9 +2062,9 @@ ItemUsePPRestore:
 	ld [wMonDataLocation], a
 	call GetMaxPP
 	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call GetSelectedMoveOffset
-	ld bc, wPartyMon1PP - wPartyMon1Moves
+	ld bc, MON_PP - MON_MOVES
 	add hl, bc ; hl now points to move's PP
 	ld a, [wMaxPP]
 	ld b, a
@@ -2098,7 +2112,7 @@ ItemUsePPRestore:
 .elixirLoop
 	push bc
 	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call GetSelectedMoveOffset
 	ld a, [hl]
 	and a ; does the current slot have a move?
@@ -2375,14 +2389,14 @@ GotOffBicycleText:
 ; [wCurrentMenuItem] = index of move (when using a PP Up)
 RestoreBonusPP:
 	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	push hl
 	ld de, wNormalMaxPPList - 1
 	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wNormalMaxPPList
 	pop hl
-	ld c, wPartyMon1PP - wPartyMon1Moves
+	ld c, MON_PP - MON_MOVES
 	ld b, 0
 	add hl, bc ; hl now points to move 1 PP
 	ld de, wNormalMaxPPList
@@ -2468,13 +2482,13 @@ GetMaxPP:
 	ld a, [wMonDataLocation]
 	and a
 	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	jr z, .sourceWithMultipleMon
 	ld hl, wEnemyMon1Moves
 	dec a
 	jr z, .sourceWithMultipleMon
 	ld hl, wBoxMon1Moves
-	ld bc, wBoxMon2 - wBoxMon1
+	ld bc, BOXMON_STRUCT_LENGTH
 	dec a
 	jr z, .sourceWithMultipleMon
 	ld hl, wDayCareMonMoves
@@ -2501,7 +2515,7 @@ GetMaxPP:
 	ld b, a ; b = normal max PP
 	pop hl
 	push bc
-	ld bc, wPartyMon1PP - wPartyMon1Moves ; PP offset if not player's in-battle pokemon data
+	ld bc, MON_PP - MON_MOVES ; PP offset if not player's in-battle pokemon data
 	ld a, [wMonDataLocation]
 	cp 4 ; player's in-battle pokemon?
 	jr nz, .addPPOffset
@@ -2645,29 +2659,33 @@ IsKeyItem_::
 
 INCLUDE "data/items/key_items.asm"
 
+; store the new mon in the first slot, shifting all existing box data down
 SendNewMonToBox:
 	ld de, wBoxCount
 	ld a, [de]
 	inc a
 	ld [de], a
+
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	ld c, a
-.loop
+.shiftSpeciesLoop
 	inc de
 	ld a, [de]
 	ld b, a
 	ld a, c
 	ld c, b
 	ld [de], a
-	cp $ff
-	jr nz, .loop
+	cp -1
+	jr nz, .shiftSpeciesLoop
+
 	call GetMonHeader
 	ld hl, wBoxMonOT
 	ld bc, NAME_LENGTH
 	ld a, [wBoxCount]
 	dec a
-	jr z, .skip
+	jr z, .skipOTshift ; if the box was empty, there is nothing to shift
+
 	dec a
 	call AddNTimes
 	push hl
@@ -2679,7 +2697,7 @@ SendNewMonToBox:
 	ld a, [wBoxCount]
 	dec a
 	ld b, a
-.loop2
+.shiftMonOTLoop
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
@@ -2691,15 +2709,18 @@ SendNewMonToBox:
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .loop2
-.skip
+	jr nz, .shiftMonOTLoop
+
+.skipOTshift
 	ld hl, wPlayerName
-	ld de, wBoxMonOT
+	ld de, wBoxMon1OT
 	ld bc, NAME_LENGTH
 	call CopyData
+
 	ld a, [wBoxCount]
 	dec a
-	jr z, .skip2
+	jr z, .skipNickShift
+
 	ld hl, wBoxMonNicks
 	ld bc, NAME_LENGTH
 	dec a
@@ -2713,7 +2734,7 @@ SendNewMonToBox:
 	ld a, [wBoxCount]
 	dec a
 	ld b, a
-.loop3
+.shiftNickLoop
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
@@ -2725,21 +2746,24 @@ SendNewMonToBox:
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .loop3
-.skip2
-	ld hl, wBoxMonNicks
+	jr nz, .shiftNickLoop
+
+.skipNickShift
+	ld hl, wBoxMon1Nick
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	predef AskName
+
 	ld a, [wBoxCount]
 	dec a
-	jr z, .skip3
+	jr z, .skipMonDataShift
+
 	ld hl, wBoxMons
-	ld bc, wBoxMon2 - wBoxMon1
+	ld bc, BOXMON_STRUCT_LENGTH
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, wBoxMon2 - wBoxMon1
+	ld bc, BOXMON_STRUCT_LENGTH
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2747,20 +2771,21 @@ SendNewMonToBox:
 	ld a, [wBoxCount]
 	dec a
 	ld b, a
-.loop4
+.shiftMonDataLoop
 	push bc
 	push hl
-	ld bc, wBoxMon2 - wBoxMon1
+	ld bc, BOXMON_STRUCT_LENGTH
 	call CopyData
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, wBoxMon1 - wBoxMon2
+	ld bc, -BOXMON_STRUCT_LENGTH
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .loop4
-.skip3
+	jr nz, .shiftMonDataLoop
+
+.skipMonDataShift
 	ld a, [wEnemyMonLevel]
 	ld [wEnemyMonBoxLevel], a
 	ld hl, wEnemyMon
@@ -2790,11 +2815,12 @@ SendNewMonToBox:
 	inc de
 	xor a
 	ld b, NUM_STATS * 2
-.loop5
+.statLoop
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .loop5
+	jr nz, .statLoop
+
 	ld hl, wEnemyMonDVs
 	ld a, [hli]
 	ld [de], a
@@ -2803,12 +2829,12 @@ SendNewMonToBox:
 	ld [de], a
 	ld hl, wEnemyMonPP
 	ld b, NUM_MOVES
-.loop6
+.movePPLoop
 	ld a, [hli]
 	inc de
 	ld [de], a
 	dec b
-	jr nz, .loop6
+	jr nz, .movePPLoop
 	ret
 
 ; checks if the tile in front of the player is a shore or water tile

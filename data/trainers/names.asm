@@ -47,5 +47,4 @@ TrainerNames::
 	li "CHANNELER"
 	li "AGATHA"
 	li "LANCE"
-	li "SWIMMER♀"
 	assert_list_length NUM_TRAINERS

@@ -195,7 +195,6 @@ ChannelerPic::     INCBIN "gfx/gstrainers/channeler.pic"
 AgathaPic::        INCBIN "gfx/gstrainers/agatha.pic"
 LancePic::         INCBIN "gfx/gstrainers/lance.pic"
 MrFujiPic::        INCBIN "gfx/gstrainers/mrfuji.pic"
-SwimmerFPic::      INCBIN "gfx/gstrainers/swimmer_f.pic"
 ENDC
 
 IF !GEN_2_GRAPHICS
@@ -224,7 +223,7 @@ BirdKeeperPic::    INCBIN "gfx/trainers/birdkeeper.pic"
 BlackbeltPic::     INCBIN "gfx/trainers/blackbelt.pic"
 Rival1Pic::        INCBIN "gfx/trainers/rival1.pic"
 ProfOakPic::       INCBIN "gfx/trainers/prof.oak.pic"
-ChiefPic::
+MrFujiPic::        INCBIN "gfx/gstrainers/mrfuji.pic"
 ScientistPic::     INCBIN "gfx/trainers/scientist.pic"
 GiovanniPic::      INCBIN "gfx/trainers/giovanni.pic"
 RocketPic::        INCBIN "gfx/trainers/rocket.pic"

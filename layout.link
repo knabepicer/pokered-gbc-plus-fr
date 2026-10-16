@@ -220,6 +220,8 @@ ROMX $38
 ROMX $39
 	org $4000
 	"Party Mon Sprites Gfx 2"
+	
+ROMX $3A
 	"Party Mon Sprites Routines"
 WRAM0
 	"Stack"

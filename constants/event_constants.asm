@@ -96,6 +96,7 @@
 	const EVENT_RESCUED_MR_FUJI_2
 	const_skip 16
 	const EVENT_GOT_POKE_FLUTE
+	const EVENT_BEAT_FUJI
 
 ; Vermilion City events
 	const_next $150
@@ -703,6 +704,9 @@
 	const_skip 14
 	const EVENT_BEAT_MANSION_4_TRAINER_0
 	const EVENT_BEAT_MANSION_4_TRAINER_1
+	const_skip 4
+	const EVENT_BEAT_MEW
+	const EVENT_FIGHT_MEW
 
 ; Safari Zone events
 	const_next $880
@@ -711,6 +715,7 @@
 ; Cerulean Cave events
 	const_next $8C0
 	const_skip
+	const EVENT_FIGHT_MEWTWO
 	const EVENT_BEAT_MEWTWO
 
 ; Indigo Plateau events

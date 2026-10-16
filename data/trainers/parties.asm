@@ -47,7 +47,6 @@ TrainerDataPointers:
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
-	dw SwimmerFData
 	assert_table_length NUM_TRAINERS
 
 ; if first byte != $FF, then
@@ -132,11 +131,6 @@ LassData:
 ; Celadon Gym
 	db 23, BELLSPROUT, WEEPINBELL, 0
 	db 23, ODDISH, GLOOM, 0
-; Route 10 (converted from jr trainer f)
-	db 20, PIKACHU, CLEFAIRY, 0
-; Route 9 (converted from jr trainer f)
-	db 18, ODDISH, BELLSPROUT, ODDISH, BELLSPROUT, 0
-	db 23, MEOWTH, 0
 
 SailorData:
 ; SS Anne Stern
@@ -206,11 +200,6 @@ JrTrainerFData:
 	db 29, BELLSPROUT, ODDISH, TANGELA, 0
 ; Route 20
 	db 30, TENTACOOL, HORSEA, SEEL, 0
-; Route 8 (converted from lasses)
-	db 23, NIDORAN_F, NIDORINA, 0
-	db 24, MEOWTH, MEOWTH, MEOWTH, 0
-	db 19, PIDGEY, RATTATA, NIDORAN_M, MEOWTH, PIKACHU, 0
-	db 22, CLEFAIRY, CLEFAIRY, 0
 
 PokemaniacData:
 ; Route 10
@@ -761,15 +750,3 @@ AgathaData:
 
 LanceData:
 	db $FF, 58, GYARADOS, 56, DRAGONAIR, 56, DRAGONAIR, 60, AERODACTYL, 62, DRAGONITE, 0
-
-SwimmerFData:
-; Route 20 ( all from beauty)
-	db 35, SEAKING, 0
-	db 30, SHELLDER, SHELLDER, CLOYSTER, 0
-	db 31, POLIWAG, SEAKING, 0
-; Route 19
-	db 27, POLIWAG, GOLDEEN, SEAKING, GOLDEEN, POLIWAG, 0
-	db 30, GOLDEEN, SEAKING, 0
-	db 29, STARYU, STARYU, STARYU, 0
-; Route 20
-	db 30, SEADRA, HORSEA, SEADRA, 0

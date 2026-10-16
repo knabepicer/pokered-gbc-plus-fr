@@ -21,6 +21,21 @@ PokemonTower7F_ScriptPointers:
 	dw_const PokemonTower7FEndBattleScript,         SCRIPT_POKEMONTOWER7F_END_BATTLE
 	dw_const PokemonTower7FHideNPCScript,           SCRIPT_POKEMONTOWER7F_HIDE_NPC
 	dw_const PokemonTower7FWarpToMrFujiHouseScript, SCRIPT_POKEMONTOWER7F_WARP_TO_MR_FUJI_HOUSE
+	dw_const PokemonTower7FFujiEndBattleScript,     SCRIPT_POKEMONTOWER7F_END_BATTLE_FUJI
+
+PokemonTower7FFujiEndBattleScript:
+	ld a, [wIsInBattle]
+	cp $ff
+	jp z, PokemonTower7FSetDefaultScript
+	ld a, PAD_CTRL_PAD
+	ld [wJoyIgnore], a
+	ld a, TEXT_POKEMONTOWER7F_MR_FUJI_POST_BATTLE
+	ldh [hTextID], a
+	call DisplayTextID
+	SetEvent EVENT_BEAT_FUJI
+	ld [wPokemonTower7FCurScript], a
+	ld [wCurMapScript], a
+	jp PokemonTower7FSetDefaultScript
 
 PokemonTower7FEndBattleScript:
 	ld hl, wMiscFlags
@@ -193,6 +208,7 @@ PokemonTower7F_TextPointers:
 	dw_const PokemonTower7FRocket2Text, TEXT_POKEMONTOWER7F_ROCKET2
 	dw_const PokemonTower7FRocket3Text, TEXT_POKEMONTOWER7F_ROCKET3
 	dw_const PokemonTower7FMrFujiText,  TEXT_POKEMONTOWER7F_MR_FUJI
+	dw_const FujiPostBattleText, TEXT_POKEMONTOWER7F_MR_FUJI_POST_BATTLE
 
 PokemonTower7TrainerHeaders:
 	def_trainers
@@ -224,6 +240,10 @@ PokemonTower7FRocket3Text:
 
 PokemonTower7FMrFujiText:
 	text_asm
+	CheckEvent EVENT_BEAT_FUJI
+	jp nz, .FinalTalk
+	CheckEvent EVENT_BEAT_MEWTWO
+	jr nz, .BattleTime
 	ld hl, .RescueText
 	call PrintText
 	SetEvent EVENT_RESCUED_MR_FUJI
@@ -240,10 +260,69 @@ PokemonTower7FMrFujiText:
 	ld a, SCRIPT_POKEMONTOWER7F_WARP_TO_MR_FUJI_HOUSE
 	ld [wPokemonTower7FCurScript], a
 	ld [wCurMapScript], a
+	jr .done
+	.BattleTime
+	ld hl, .PreBattleFujiText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .refused
+	ld hl, .PreBattleFujiAcceptedText
+	call PrintText
+	call Delay3
+	ld hl, wStatusFlags3
+	set BIT_TALKED_TO_TRAINER, [hl]
+	set BIT_PRINT_END_BATTLE_TEXT, [hl]
+	ld hl, FujiDefeatedText
+	ld de, FujiDefeatedText
+	call SaveEndBattleTextPointers
+	ld a, OPP_MR_FUJI
+	ld [wCurOpponent], a
+	ld a, 1
+	ld [wTrainerNo], a
+	jr .endBattle
+.refused
+	ld hl, .PreBattleFujiRefusedText
+	call PrintText
+	jr .done
+.endBattle
+	ld a, SCRIPT_POKEMONTOWER7F_END_BATTLE_FUJI
+	ld [wPokemonTower7FCurScript], a
+	ld [wCurMapScript], a
+	jr .done
+.FinalTalk
+	ld hl, .PostBattleRetalkFujiText
+	call PrintText
+.done
 	jp TextScriptEnd
+
+.PostBattleRetalkFujiText:
+	text_far _PostBattleRetalkFujiText
+	text_end
+
+.PreBattleFujiText:
+	text_far _PreBattleFujiText
+	text_end
+	
+.PreBattleFujiAcceptedText:
+	text_far _PreBattleFujiAcceptedText
+	text_end
+	
+.PreBattleFujiRefusedText:
+	text_far _PreBattleFujiRefusedText
+	text_end
 
 .RescueText:
 	text_far _PokemonTower7FMrFujiRescueText
+	text_end
+
+FujiDefeatedText:
+	text_far _FujiDefeatedText
+	text_end
+
+FujiPostBattleText:
+	text_far _FujiPostBattleText
 	text_end
 
 PokemonTower7FRocket1BattleText:
