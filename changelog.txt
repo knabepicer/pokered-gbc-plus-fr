@@ -6,7 +6,7 @@
 -Many trainers edited to ensure fighting all trainers will have you encounter all pokemon lines at least once, bar legendaries (ex: Eevee added to Female Jr. Trainers) and for more variety
 -Ghost (Lick) SE against psychic, Poison neutral against Bug
 -Leech Seed/Poison/Burn tweaked to 1/8 max HP damage
--Bag size increased to 50
+-Bag size increased to 50 (tbd)
 -Press B to quickly run from wild battle
 -Safari Balls now function like Great Balls, improving their catchrates against most/all Safari Zone captures
 
