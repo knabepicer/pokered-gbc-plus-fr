@@ -13,6 +13,7 @@
 	const SPRITESET_CYCLING_ROAD    ; 09
 	const SPRITESET_ROUTE_18_19     ; 0a
 	const SPRITESET_FUCHSIA         ; 0a
+	const SPRITESET_PEWTER_ONLY
 DEF NUM_SPRITE_SETS EQU const_value - 1
 
 ; split sprite set ids

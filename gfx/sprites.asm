@@ -131,3 +131,18 @@ SnorlaxBigSprite::       INCBIN "gfx/sprites/mons/snorlax3x3.2bpp"
 ; Still sprites
 BenchGuySprite::         INCBIN "gfx/sprites/bench_guy.2bpp"
 BillsMachine::           INCBIN "gfx/sprites/billsmachine.2bpp"
+
+SECTION "NPC Sprites 4", ROMX
+PsychicSprite::           INCBIN "gfx/sprites/psychic.2bpp"
+CooltrainerFRealSprite::  INCBIN "gfx/sprites/cooltrainer_f_real.2bpp"
+CooltrainerMRealSprite::  INCBIN "gfx/sprites/cooltrainer_m_real.2bpp"
+TamerSprite::             INCBIN "gfx/sprites/tamer.2bpp"
+BurglarSprite::           INCBIN "gfx/sprites/burglar.2bpp"
+JugglerSprite::           INCBIN "gfx/sprites/juggler.2bpp"
+CueballSprite::           INCBIN "gfx/sprites/cueball.2bpp"
+JrTrainerFSprite::        INCBIN "gfx/sprites/jr_trainer_f.2bpp"
+EngineerSprite::          INCBIN "gfx/sprites/engineer.2bpp"
+SuperNerdRealSprite::     INCBIN "gfx/sprites/super_nerd_real.2bpp"
+PokemaniacSprite::        INCBIN "gfx/sprites/pokemaniac.2bpp"
+BirdkeeperSprite::        INCBIN "gfx/sprites/birdkeeper.2bpp"
+BugCatcherSprite::        INCBIN "gfx/sprites/bug_catcher.2bpp"

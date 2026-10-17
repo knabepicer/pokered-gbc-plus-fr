@@ -78,6 +78,20 @@ SpriteSheetPointerTable:
 	overworld_sprite Koga2Sprite, 12
 	overworld_sprite SabrinaSprite, 12
 	overworld_sprite BlaineSprite, 12
+
+	overworld_sprite PsychicSprite, 12          ; SPRITE_PSYCHIC
+	overworld_sprite CooltrainerFRealSprite, 12 ; SPRITE_COOLTRAINER_F_REAL
+	overworld_sprite CooltrainerMRealSprite, 12 ; SPRITE_COOLTRAINER_M_REAL
+	overworld_sprite TamerSprite, 12            ; SPRITE_TAMER
+	overworld_sprite BurglarSprite, 12          ; SPRITE_BURGLAR
+	overworld_sprite JugglerSprite, 12          ; SPRITE_JUGGLER
+	overworld_sprite CueballSprite, 12          ; SPRITE_CUEBALL
+	overworld_sprite JrTrainerFSprite, 12       ; SPRITE_JR_TRAINER_F
+	overworld_sprite EngineerSprite, 12         ; SPRITE_ENGINEER
+	overworld_sprite SuperNerdRealSprite, 12    ; SPRITE_SUPER_NERD_REAL
+	overworld_sprite PokemaniacSprite, 12       ; SPRITE_POKEMANIAC
+	overworld_sprite BirdkeeperSprite, 12       ; SPRITE_BIRDKEEPER
+	overworld_sprite BugCatcherSprite, 12       ; SPRITE_BUG_CATCHER
 ; Map Pokémons
 	overworld_sprite ArticunoSprite, 12
 	overworld_sprite ChanseySprite, 12
