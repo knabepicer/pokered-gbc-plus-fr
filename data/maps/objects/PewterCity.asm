@@ -6,7 +6,7 @@
 	const_export PEWTERCITY_YOUNGSTER
 
 PewterCity_Object:
-	db $2c ; border block
+	db $a ; border block
 
 	def_warp_events
 	warp_event 14,  7, MUSEUM_1F, 1

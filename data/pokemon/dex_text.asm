@@ -1249,13 +1249,13 @@ _StarmieDexEntry::
 	dex
 
 _BulbasaurDexEntry::
-	text "A strange seed was"
-	next "planted on its"
-	next "back at birth."
+	text "Spends her time"
+	next "in the sun,"
+	next "hoping her bulb"
 
-	page "The plant sprouts"
-	next "and grows with"
-	next "this #MON"
+	page "will blossom into"
+	next "beauty when she"
+	next "grows up"
 	dex
 
 _VenusaurDexEntry::

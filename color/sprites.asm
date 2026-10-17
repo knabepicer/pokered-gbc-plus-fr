@@ -168,6 +168,7 @@ ColorPlayerSprite::
 	cp 2
 	jr nz, .birdTest
 	dec a ; if z, then need palette 1, which is 1 lower then the 2 already in 'a'
+	dec a ; but actually we need palette 0 aka red for what we're gonna change the sprite to
 	jr .gotPlayerColor
 .birdTest
 	cp 3 ; if z, then need palette 3, which is already the value of 'a'
