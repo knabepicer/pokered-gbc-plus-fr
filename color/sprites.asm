@@ -656,6 +656,9 @@ SpritePaletteAssignments: ; Characters on the overworld
 
 	; SPRITE_BUG_CATCHER
 	db SPR_PAL_RANDOM
+
+	; SPRITE_BILL
+	db SPR_PAL_BROWN
 ; Map Pokémons	
 	; SPRITE_ARTICUNO
 	db SPR_PAL_BLUE

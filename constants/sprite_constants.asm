@@ -87,6 +87,7 @@
 	const SPRITE_POKEMANIAC
 	const SPRITE_BIRDKEEPER
 	const SPRITE_BUG_CATCHER
+	const SPRITE_BILL
 ; Map Pokémons
 	const SPRITE_ARTICUNO				 ; $3d
 	const SPRITE_CHANSEY				 ; $3e

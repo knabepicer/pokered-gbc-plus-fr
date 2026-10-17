@@ -146,3 +146,6 @@ SuperNerdRealSprite::     INCBIN "gfx/sprites/super_nerd_real.2bpp"
 PokemaniacSprite::        INCBIN "gfx/sprites/pokemaniac.2bpp"
 BirdkeeperSprite::        INCBIN "gfx/sprites/birdkeeper.2bpp"
 BugCatcherSprite::        INCBIN "gfx/sprites/bug_catcher.2bpp"
+BillSprite::              INCBIN "gfx/sprites/bill.2bpp"
+
+

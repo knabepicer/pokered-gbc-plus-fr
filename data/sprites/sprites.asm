@@ -92,6 +92,7 @@ SpriteSheetPointerTable:
 	overworld_sprite PokemaniacSprite, 12       ; SPRITE_POKEMANIAC
 	overworld_sprite BirdkeeperSprite, 12       ; SPRITE_BIRDKEEPER
 	overworld_sprite BugCatcherSprite, 12       ; SPRITE_BUG_CATCHER
+	overworld_sprite BillSprite, 12      	    ; SPRITE_BILL
 ; Map Pokémons
 	overworld_sprite ArticunoSprite, 12
 	overworld_sprite ChanseySprite, 12

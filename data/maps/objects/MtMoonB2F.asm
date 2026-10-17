@@ -10,7 +10,7 @@
 	const_export MTMOONB2F_TM_MEGA_PUNCH
 
 MtMoonB2F_Object:
-	db $50 ; border block
+	db $3 ; border block
 
 	def_warp_events
 	warp_event 25,  9, MT_MOON_B1F, 2
@@ -21,7 +21,7 @@ MtMoonB2F_Object:
 	def_bg_events
 
 	def_object_events
-	object_event 12,  8, SPRITE_SUPER_NERD, STAY, RIGHT, TEXT_MTMOONB2F_SUPER_NERD, OPP_SUPER_NERD, 2
+	object_event 12,  8, SPRITE_SUPER_NERD_REAL, STAY, RIGHT, TEXT_MTMOONB2F_SUPER_NERD, OPP_SUPER_NERD, 2
 	object_event 11, 16, SPRITE_ROCKET, STAY, DOWN, TEXT_MTMOONB2F_ROCKET1, OPP_ROCKET, 1
 	object_event 15, 22, SPRITE_ROCKET, STAY, DOWN, TEXT_MTMOONB2F_ROCKET2, OPP_ROCKET, 2
 	object_event 29, 11, SPRITE_ROCKET, STAY, UP, TEXT_MTMOONB2F_ROCKET3, OPP_ROCKET, 3
