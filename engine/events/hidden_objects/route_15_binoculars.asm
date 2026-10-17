@@ -6,7 +6,6 @@ Route15GateLeftBinoculars:
 	tx_pre Route15UpstairsBinocularsText
 	ld a, ARTICUNO
 	ld [wCurPartySpecies], a
-	call PlayCry
 	ld d, PAL_ARTICUNO
 	jp DisplayMonFrontSpriteInBox
 

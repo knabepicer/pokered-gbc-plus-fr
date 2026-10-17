@@ -207,6 +207,7 @@ ItemUseBall:
 	ld a, [hl]
 	cp GREAT_BALL
 	jr z, .checkForAilments
+	ld a, [hl]
 	cp SAFARI_BALL
 	jr z, .checkForAilments
 
@@ -257,7 +258,9 @@ ItemUseBall:
 	cp GREAT_BALL
 	ld a, 8
 	jr z, .skip1
+	ld a, [wCurItem]
 	cp SAFARI_BALL
+	ld a, 8
 	jr z, .skip1
 	ld a, 12
 

@@ -1145,17 +1145,16 @@ HandlePlayerBlackOut:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .notRival1Battle
-	ld a, [wCurOpponent]
-	cp OPP_RIVAL1
-	jr nz, .notRival1Battle
+	ld a, [wIsInBattle] ; are we in a battle?	
+	dec a ; is the battle a wild battle (without a trainer?)?
+	jr z, .notRival1Battle ;if yes, don't print our message.
 	hlcoord 0, 0  ; rival 1 battle
 	lb bc, 8, 21
 	call ClearScreenArea
 	call ScrollTrainerPicAfterBattle
 	ld c, 40
 	call DelayFrames
-	ld hl, Rival1WinText
-	call PrintText
+	call PrintEndBattleText
 	ld a, [wCurMap]
 	cp OAKS_LAB
 	ret z            ; starter battle in oak's lab: don't black out
@@ -2803,6 +2802,9 @@ NoMovesLeftText:
 	text_end
 
 SwapMovesInMenu:
+	ld a, [wPlayerBattleStatus3]
+	bit TRANSFORMED, a
+	jp nz, MoveSelectionMenu ; No move swapping while transformed
 	ld a, [wMenuItemToSwap]
 	and a
 	jr z, .noMenuItemSelected
@@ -4705,12 +4707,16 @@ CriticalHitTest:
 	jr nc, .SkipHighCritical
 	ld b, $ff
 .SkipHighCritical
+	ld a, b	
+	inc a ; optimization of "cp $ff"
+	jr z, .guaranteedCriticalHit
 	call BattleRandom            ; generates a random value, in "a"
 	rlc a
 	rlc a
 	rlc a
 	cp b                         ; check a against calculated crit rate
 	ret nc                       ; no critical hit if no borrow
+	.guaranteedCriticalHit
 	ld a, $1
 	ld [wCriticalHitOrOHKO], a   ; set critical hit flag
 	ret
@@ -5323,6 +5329,21 @@ AdjustDamageForMoveType:
 	ld b, a
 	ld a, [hl] ; a = damage multiplier
 	ldh [hMultiplier], a
+	and a  ; cp NO_EFFECT
+	jr z, .gotMultiplier
+	cp NOT_VERY_EFFECTIVE
+	jr nz, .nothalf
+	ld a, [wDamageMultipliers]
+	and $7f
+	srl a
+	jr .gotMultiplier
+.nothalf
+	cp SUPER_EFFECTIVE
+	jr nz, .gotMultiplier
+	ld a, [wDamageMultipliers]
+	and $7f
+	sla a
+.gotMultiplier
 	add b
 	ld [wDamageMultipliers], a
 	xor a
@@ -5496,6 +5517,9 @@ MoveHitTest:
 .doAccuracyCheck
 ; if the random number generated is greater than or equal to the scaled accuracy, the move misses
 ; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
+	ld a, b
+	cp $FF ; Is the value $FF?
+	ret z ; If so, we need not calculate, just so we can fix this bug.
 	call BattleRandom
 	cp b
 	jr nc, .moveMissed
