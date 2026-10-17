@@ -586,7 +586,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db SPR_PAL_EXTRA1
 
 	; 0x39: SPRITE_AGATHA
-	db SPR_PAL_BLUE
+	db SPR_PAL_EXTRA1
 
 	; 0x3a: SPRITE_BRUNO
 	db SPR_PAL_BROWN

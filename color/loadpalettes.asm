@@ -330,6 +330,7 @@ MapSprPalSwapList:
 	db VERMILION_CITY,        SPRITE_PAL_GREYMON,      4 ; MACHOP
 	db VERMILION_GYM,         SPRITE_PAL_SURGE,        4
 	db VIRIDIAN_GYM,          SPRITE_PAL_GIOVANNI,     4
+	db AGATHAS_ROOM,		  SPRITE_PAL_KOGA, 		   4
 	db -1
 
 TilePalSwapList:
